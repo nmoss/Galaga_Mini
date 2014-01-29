@@ -34,13 +34,18 @@
 		var fired = false;
 
 		var galagans = [];
-		var galagan_blue = new Image();
-		galagan_blue.src = "galagan_blue.png";
-		galagan_blue.x = 140;
-		galagan_blue.y = 230;
 
 
-		galagans[0] = galagan_blue;
+		var enemy_missile = new Image();
+		enemy_missile.src = "enemy_missile.png";
+		var enem_missile_x = 0;
+		var enem_missile_y = 0;
+		var enem_fired = false;
+
+
+	
+
+
 
 		var isHit = false;
 		var dead = false;
@@ -107,11 +112,22 @@
 				} else if(dead == false) {
 					galagan.draw(ctx);
 				}
-				if(ship_hit()){
+				galagan_fire();
+				if(enem_fired){
+					if(ship_hit()){
+						ship_explosion.x = x;
 
-					ship_explosion.draw(ctx);
-
-					return;
+						for(var i = 0; i < 4; i++){
+							ship_explosion.draw(ctx);
+						}
+						enem_fired = false;
+						enem_missile_y = 0;
+						x = -50;
+						clearInterval(game);
+					}
+					else {
+						draw_enemy_missile();
+					}
 				}
 				//draw_galagans();
 
@@ -130,6 +146,26 @@
 				}
 			}
 
+			function draw_enemy_missile(){
+				ctx.drawImage(enemy_missile, enem_missile_x, enem_missile_y, 10, 12);
+				enem_missile_y += 10;
+				if(enem_missile_y > 400){
+					enem_fired = false;
+					enem_missile_y = 0;
+				}
+			}
+
+			//need to take a list of all the galagans
+			function galagan_fire(){
+				if(enem_fired == false){
+					enem_missile_y = 105;
+					enem_missile_x = 140;
+					enem_fired = true;
+				} else {
+					return false;
+				}
+			}
+
 			function draw_galagans(){
 				ctx.drawImage(galagan_blue, 140, 100, 10*2, 14*2);
 			}
@@ -144,12 +180,11 @@
 				return false;
 			}
 
+			//need to put enemy missile here
 			function ship_hit(){
-				enemy_missile_x = 0;
-				enemy_missile_y = 250;
-				if(enemy_missile_x >= x && enemy_missile_x <= x + 10 && enemy_missile_y >= 250){
-					enemey_fired = false;
-					enemey_missile_y = 240; //something else 
+				if(enem_missile_x >= x && enem_missile_x <= x + 10 && enem_missile_y >= 250){
+					enem_fired = false;
+					enem_missile_y = 240; //something else 
 					return true;
 				}
 				return false;
@@ -157,7 +192,7 @@
 			
 
 
-
+			//** ANIMATED STUFF **//
 			var galagan_data = {
 				field: field,
 				imgSrc: "galagan_blue_animated.png",
@@ -179,18 +214,19 @@
 			var ship_explosion_data = {
 				field: field,
 				imgSrc: "ship_explosion.png",
-				x: x,
+				x: 0,
 				y: 250,
 				spw: 26,
 				frames: 4
 			};
 
 			var galagan = new GalagaSprite(galagan_data);
-			var galagan_explosion = new GalagaSprite(galagan_explosion_data);
+			galagans[0] = galagan;
+ 			var galagan_explosion = new GalagaSprite(galagan_explosion_data);
 			var ship_explosion = new GalagaSprite(ship_explosion_data);
 
 			var handler = window.addEventListener('keydown', onKeyDown, true);
-			window.setInterval(run, 60);
+			var game = window.setInterval(run, 60);
 		} //init()
 
 	</script>
