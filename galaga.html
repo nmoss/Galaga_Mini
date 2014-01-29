@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+	<title>Galaga</title>
+	<script type="text/javascript" src="background.js"></script>
+	<script type="text/javascript" src="galaga_sprite.js"></script>
+	
+	<style type="text/css">
+		canvas { border: 1px solid black; }
+
+		#field {
+				 display: block;
+				 margin-left: auto;
+				 margin-right: auto; }	
+		
+		#title { text-align: center;
+				 color: green; }
+
+		p { text-align: center; }
+	</style>
+	<script type="text/javascript">
+		
+		var fighter = new Image();
+		fighter.src = "fighter.png";
+		fighter.x = 0;
+		fighter.y = 0;
+		var x = 0;
+
+		var missile = new Image();
+		missile.src = "missile.png";
+		var missile_x = x;
+		var missile_y = 240; //maybe
+		var fired = false;
+
+		var galagans = [];
+		var galagan_blue = new Image();
+		galagan_blue.src = "galagan_blue.png";
+		galagan_blue.x = 140;
+		galagan_blue.y = 230;
+
+
+		galagans[0] = galagan_blue;
+
+
+		function init(){
+			var field = document.getElementById("field");
+			var ctx = field.getContext("2d");
+
+			var image = "background.png";
+
+			ctx.drawImage(fighter, 0, 250, 14*2, 14*2);
+			//ctx.drawImage(galagan_blue, 45, 132, 8, 10);
+
+			var parallax = new ParallaxScrolling(ctx, image, fighter);
+
+			function onKeyDown(event){
+				if(event.keyCode == 37){
+					if(x > -4){
+						x = x - 3;
+					} else {
+						x = 0;
+					}
+				}
+				if(event.keyCode == 39){
+					if( x < 220){
+						x = x + 3;
+					} else {
+						x = 214;
+					}
+				}
+				if(event.keyCode == 32){
+					//console.log("I'm a firing my lazer");
+					if(fired == false){
+						fired = true;
+						missile_x = x+4;
+					}
+				}
+			}
+
+			function run(){
+				ctx.clearRect(0, 0, field.width, field.height);
+				parallax.draw();
+				draw_fighter();
+				if(fired){
+					draw_missile();
+				}
+				draw_galagans();
+
+			}
+
+			function draw_fighter(){
+				ctx.drawImage(fighter, x, 250, 14*2, 14*2);
+			}
+
+			function draw_missile(){
+				ctx.drawImage(missile, missile_x, missile_y, 10, 12);
+				missile_y -= 10;
+				if(missile_y < 30){
+					fired = false;
+					missile_y = 240;
+				}
+			}
+
+			function draw_galagans(){
+				ctx.drawImage(galagan_blue, 140, 100, 10*2, 14*2);
+			}
+
+
+			var handler = window.addEventListener('keydown', onKeyDown, true);
+			window.setInterval(run, 60);
+		} //init()
+
+	</script>
+	</head>
+	<body onload="init()">
+		<canvas id="field" width="244px" height="288px"></canvas>
+
+	</body>	
+</html>
