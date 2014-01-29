@@ -168,7 +168,7 @@
 			//need a list of all the galagans to enter here...
 			function missile_hit_detect_galagan(galagans){
 				for(var i = 0; i < galagans.length; i++){
-					if(missile_x >= galagans[i].x && missile_x <=galagans[i].x + 20 && missile_y <= 100){
+					if(missile_x >= galagans[i].x - 5 && missile_x <=galagans[i].x + 10 /*&& missile_y <= 40 */ && missile_y <= galagans[i].y ){
 						fired = false;
 						missile_y = 240;
 						for(var j = 0; j < 4; j++){
@@ -268,8 +268,174 @@
 				y: 100,
 				spw: 20,
 				frames: 2
-			}
+			};
 
+			var galagan7_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 160,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan8_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 140,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan9_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 120,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan10_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 100,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan11_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 80,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan12_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 60,
+				y: 80,
+				spw: 20,
+				frames: 2
+			};
+
+
+			//last row of red guys
+
+			var galagan13_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 160,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan14_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 140,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan15_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 120,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan16_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 100,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan17_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 80,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan18_data = {
+				field: field,
+				imgSrc: "red_animation.png",
+				x: 60,
+				y: 60,
+				spw: 20,
+				frames: 2
+			};
+
+			//front row of blues 
+
+			var galagan19_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 160,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan20_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 140,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan21_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 120,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan22_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 100,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan23_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 80,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan24_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 60,
+				y: 120,
+				spw: 20,
+				frames: 2
+			};
 
 
 			var galagan = new GalagaSprite(galagan_data);
@@ -277,7 +443,32 @@
 			var galagan3 = new GalagaSprite(galagan3_data);
 			var galagan4 = new GalagaSprite(galagan4_data);
 			var galagan5 = new GalagaSprite(galagan5_data);
-			var galagan6 = new GalagaSprite(galagan6_data)
+			var galagan6 = new GalagaSprite(galagan6_data);
+
+			//red back row 1
+			var galagan7 = new GalagaSprite(galagan7_data);
+			var galagan8 = new GalagaSprite(galagan8_data);
+			var galagan9 = new GalagaSprite(galagan9_data);
+			var galagan10 = new GalagaSprite(galagan10_data);
+			var galagan11 = new GalagaSprite(galagan11_data);
+			var galagan12 = new GalagaSprite(galagan12_data);
+
+			//red last row
+			var galagan13 = new GalagaSprite(galagan13_data);
+			var galagan14 = new GalagaSprite(galagan14_data);
+			var galagan15 = new GalagaSprite(galagan15_data);
+			var galagan16 = new GalagaSprite(galagan16_data);
+			var galagan17 = new GalagaSprite(galagan17_data);
+			var galagan18 = new GalagaSprite(galagan18_data);
+
+			//blue front row
+			var galagan19 = new GalagaSprite(galagan19_data);
+			var galagan20 = new GalagaSprite(galagan20_data);
+			var galagan21 = new GalagaSprite(galagan21_data);
+			var galagan22 = new GalagaSprite(galagan22_data);
+			var galagan23 = new GalagaSprite(galagan23_data);
+			var galagan24 = new GalagaSprite(galagan24_data);
+
 			//galagan2.draw(ctx);
 			galagans[0] = galagan;
 			galagans[1] = galagan2;
@@ -285,6 +476,24 @@
 			galagans[3] = galagan4;
 			galagans[4] = galagan5;
 			galagans[5] = galagan6;
+			galagans[6] = galagan7;
+			galagans[7] = galagan8;
+			galagans[8] = galagan9;
+			galagans[9] = galagan10;
+			galagans[10] = galagan11;
+			galagans[11] = galagan12;
+			galagans[12] = galagan13;
+			galagans[13] = galagan14;
+			galagans[14] = galagan15;
+			galagans[15] = galagan16;
+			galagans[16] = galagan17;
+			galagans[17] = galagan18;
+			galagans[18] = galagan19;
+			galagans[19] = galagan20;
+			galagans[20] = galagan21;
+			galagans[21] = galagan22;
+			galagans[22] = galagan23;
+			galagans[23] = galagan24;
 
  			var galagan_explosion = new GalagaSprite(galagan_explosion_data);
 			var ship_explosion = new GalagaSprite(ship_explosion_data);
