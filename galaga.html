@@ -42,6 +42,9 @@
 
 		galagans[0] = galagan_blue;
 
+		var isHit = false;
+		var dead = false;
+
 
 		function init(){
 			var field = document.getElementById("field");
@@ -78,14 +81,39 @@
 				}
 			}
 
+			//runs the game
 			function run(){
 				ctx.clearRect(0, 0, field.width, field.height);
 				parallax.draw();
 				draw_fighter();
 				if(fired){
-					draw_missile();
+					if(missile_hit_detect_galagan()){
+						//do explosion stuff
+						isHit = true;
+						fired = false;
+
+
+					} else {
+						draw_missile();
+					}
 				}
-				draw_galagans();
+				if(isHit){
+					for(var i = 0; i < 4; i++){
+						galagan_explosion.draw(ctx);
+					}
+					isHit = false;
+					dead = true;
+					//isHit = false;
+				} else if(dead == false) {
+					galagan.draw(ctx);
+				}
+				if(ship_hit()){
+
+					ship_explosion.draw(ctx);
+
+					return;
+				}
+				//draw_galagans();
 
 			}
 
@@ -106,6 +134,60 @@
 				ctx.drawImage(galagan_blue, 140, 100, 10*2, 14*2);
 			}
 
+			//need a list of all the galagans to enter here...
+			function missile_hit_detect_galagan(){
+				if(missile_x >= 135 && missile_x <=155 && missile_y <= 100){
+					fired = false;
+					missile_y = 240;
+					return true;
+				}
+				return false;
+			}
+
+			function ship_hit(){
+				enemy_missile_x = 0;
+				enemy_missile_y = 250;
+				if(enemy_missile_x >= x && enemy_missile_x <= x + 10 && enemy_missile_y >= 250){
+					enemey_fired = false;
+					enemey_missile_y = 240; //something else 
+					return true;
+				}
+				return false;
+			}
+			
+
+
+
+			var galagan_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 140,
+				y: 100,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan_explosion_data = {
+				field: field,
+				imgSrc: "galagan_explosion.png",
+				x: 140,
+				y: 100,
+				spw: 24,
+				frames: 5
+			};
+
+			var ship_explosion_data = {
+				field: field,
+				imgSrc: "ship_explosion.png",
+				x: x,
+				y: 250,
+				spw: 26,
+				frames: 4
+			};
+
+			var galagan = new GalagaSprite(galagan_data);
+			var galagan_explosion = new GalagaSprite(galagan_explosion_data);
+			var ship_explosion = new GalagaSprite(ship_explosion_data);
 
 			var handler = window.addEventListener('keydown', onKeyDown, true);
 			window.setInterval(run, 60);
