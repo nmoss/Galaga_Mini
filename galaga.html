@@ -27,6 +27,8 @@
 		fighter.y = 0;
 		var x = 0;
 
+		var score = 0;
+
 		var missile = new Image();
 		missile.src = "missile.png";
 		var missile_x = x;
@@ -83,16 +85,27 @@
 			//runs the game
 			function run(){
 				ctx.clearRect(0, 0, field.width, field.height);
+				ctx.fillStyle = "black";
 				parallax.draw();
 				draw_fighter();
+				ctx.fillStyle = "red";
+				ctx.fillText("SCORE", 200, 8);
+				ctx.fillStyle = "white"
+				if(score > 10){
+					ctx.fillText("00" + score, 205, 17);
+				} else {
+					ctx.fillText("000" + score, 205, 17);
+				}
+				ctx.fillSTyle = "black";
 				if(fired){
 					if(missile_hit_detect_galagan(galagans)){
 						//do explosion stuff
 
 						fired = false;
-						for(var i = 0; i < 4; i++){
+						/*for(var i = 0; i < 4; i++){
 							//galagan_explosion.draw(ctx);
-						}
+						} */
+						score += 2;
 
 
 					} else {
@@ -112,17 +125,36 @@
 					if(ship_hit()){
 						ship_explosion.x = x;
 
-						for(var i = 0; i < 4; i++){
+						for(var i = 0; i < 6; i++){
 							ship_explosion.draw(ctx);
 						}
 						enem_fired = false;
 						enem_missile_y = 0;
 						x = -50;
+						ctx.fillStyle = "white";
+						ctx.fillText("GAME OVER", 244/2 - 35, 180);
+						ctx.fillStyle = "red";
+						ctx.fillText("SCORE", 244/2 - 20 + 2, 190);
+						ctx.fillStyle = "white";
+						ctx.fillText("000" + score,244/2 - 20 + 7, 200);
 						clearInterval(game);
 					}
 					else {
 						draw_enemy_missile();
 					}
+				}
+				if(galagans.length == 0){
+					ctx.fillSTyle = "white";
+					ctx.fillText("CONGRATULATIONS", 244/2 - 35, 180);
+					ctx.fillStyle = "red";
+					ctx.fillText("SCORE", 244/2 - 20 + 2, 190);
+					ctx.fillStyle = "white";
+					if(score > 10){
+						ctx.fillText("00" + score, 205, 17);
+					} else {
+						ctx.fillText("000" + score, 205, 17);
+					}
+					clearInterval(game);
 				}
 				//draw_galagans();
 
