@@ -42,12 +42,6 @@
 		var enem_missile_y = 0;
 		var enem_fired = false;
 
-
-	
-
-
-
-		var isHit = false;
 		var dead = false;
 
 
@@ -92,27 +86,28 @@
 				parallax.draw();
 				draw_fighter();
 				if(fired){
-					if(missile_hit_detect_galagan()){
+					if(missile_hit_detect_galagan(galagans)){
 						//do explosion stuff
-						isHit = true;
+
 						fired = false;
+						for(var i = 0; i < 4; i++){
+							//galagan_explosion.draw(ctx);
+						}
 
 
 					} else {
 						draw_missile();
+						for(var i = 0; i < galagans.length; i++){
+							galagans[i].draw(ctx);
+						}
 					}
-				}
-				if(isHit){
-					for(var i = 0; i < 4; i++){
-						galagan_explosion.draw(ctx);
+				} else {
+					for(var i = 0; i < galagans.length; i++){
+						galagans[i].draw(ctx);
 					}
-					isHit = false;
-					dead = true;
-					//isHit = false;
-				} else if(dead == false) {
-					galagan.draw(ctx);
+					//galagans[1].draw(ctx);
 				}
-				galagan_fire();
+				galagan_fire(galagans);
 				if(enem_fired){
 					if(ship_hit()){
 						ship_explosion.x = x;
@@ -156,33 +151,41 @@
 			}
 
 			//need to take a list of all the galagans
-			function galagan_fire(){
+			function galagan_fire(galagans){
+				var key = Math.floor(Math.random() * (galagans.length-1 - 0 + 1)) + 0;
 				if(enem_fired == false){
-					enem_missile_y = 105;
-					enem_missile_x = 140;
-					enem_fired = true;
+					if(galagans.length > 0){
+						enem_missile_y = galagans[key].y;
+						enem_missile_x = galagans[key].x;
+						enem_fired = true;
+					}
 				} else {
 					return false;
 				}
 			}
 
-			function draw_galagans(){
-				ctx.drawImage(galagan_blue, 140, 100, 10*2, 14*2);
-			}
 
 			//need a list of all the galagans to enter here...
-			function missile_hit_detect_galagan(){
-				if(missile_x >= 135 && missile_x <=155 && missile_y <= 100){
-					fired = false;
-					missile_y = 240;
-					return true;
-				}
+			function missile_hit_detect_galagan(galagans){
+				for(var i = 0; i < galagans.length; i++){
+					if(missile_x >= galagans[i].x && missile_x <=galagans[i].x + 20 && missile_y <= 100){
+						fired = false;
+						missile_y = 240;
+						for(var j = 0; j < 4; j++){
+							galagan_explosion.x = galagans[i].x;
+							galagan_explosion.y = galagans[i].y;
+							galagan_explosion.draw(ctx);
+						}
+						galagans.splice(i, 1);
+						return true;
+					}
+				}//for 
 				return false;
 			}
 
 			//need to put enemy missile here
 			function ship_hit(){
-				if(enem_missile_x >= x && enem_missile_x <= x + 10 && enem_missile_y >= 250){
+				if(enem_missile_x >= x && enem_missile_x <= x + 10 && enem_missile_y >= 250 && enem_missile_y <= 260){
 					enem_fired = false;
 					enem_missile_y = 240; //something else 
 					return true;
@@ -196,11 +199,13 @@
 			var galagan_data = {
 				field: field,
 				imgSrc: "galagan_blue_animated.png",
-				x: 140,
+				x: 160,
 				y: 100,
 				spw: 20,
 				frames: 2
 			};
+
+
 
 			var galagan_explosion_data = {
 				field: field,
@@ -220,8 +225,67 @@
 				frames: 4
 			};
 
+			var galagan2_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 140,
+				y: 100,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan3_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 120,
+				y: 100,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan4_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 100,
+				y: 100,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan5_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 80,
+				y: 100,
+				spw: 20,
+				frames: 2
+			};
+
+			var galagan6_data = {
+				field: field,
+				imgSrc: "galagan_blue_animated.png",
+				x: 60,
+				y: 100,
+				spw: 20,
+				frames: 2
+			}
+
+
+
 			var galagan = new GalagaSprite(galagan_data);
+			var galagan2 = new GalagaSprite(galagan2_data);
+			var galagan3 = new GalagaSprite(galagan3_data);
+			var galagan4 = new GalagaSprite(galagan4_data);
+			var galagan5 = new GalagaSprite(galagan5_data);
+			var galagan6 = new GalagaSprite(galagan6_data)
+			//galagan2.draw(ctx);
 			galagans[0] = galagan;
+			galagans[1] = galagan2;
+			galagans[2] = galagan3;
+			galagans[3] = galagan4;
+			galagans[4] = galagan5;
+			galagans[5] = galagan6;
+
  			var galagan_explosion = new GalagaSprite(galagan_explosion_data);
 			var ship_explosion = new GalagaSprite(ship_explosion_data);
 
