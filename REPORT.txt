@@ -1,0 +1,26 @@
+GALAGA Mini
+Project 1
+CSCI 4070
+Nicholas Moss
+REPORT.txt
+
+		GALAGA Mini is an HTML5 game based on the original GALAGA arcade game by Namco, which was initially published in 1981. My version of Galaga only has a single 
+	level, with a limited number of enemy fighters. Like the original, the player controls a single fighter, and the objective is to shoot down as many enemy "galagans" as possible. Points are awarded for each kill. In the original game there are many levels and challenge stages, however implementing this seemed beyond the scope of the project. Hence Galaga Mini has a single level in which the player must shoot down as many Galagans as possible before dying. If the player succeeds in shooting down all the galagans, the player wins the game. 
+		The graphical objects consists of sprites, and a scrolling background. The background uses the same methods behind a parallax scrolling background, however instead of
+	scrolling horizontally, the background scrolls vertically to give the impression that the player is flying through space. Some of the game sprites include the player's fighter, and all the galagans. The player's fighter is not animated, but can be moved from side to side with the arrow keys. The fighter can also fire a missile by pressing space bar.
+	The galagans can also fire missiles, and a random galagan is selected to launch a missile. To make the game harder the player is only allowed to have one missile visible on the screen at a time. The galagans also are limited to one missile however. This was to make the game considerably easier, as the player's fighter moves quite slowly. The galagans themselves are animated each having two frames. This is done using the a strip of sprites, and drawing them alternatively to the screen over a quick interval. Using the same technique an explosion is drawn when a galagan is hit by a missile, or when the player's fighter is hit. 
+		The galagans and fighter interact with each other by firing missiles, with collision detection occuring when either a galagan is hit, or when the player's fighter is hit.
+	The player's fighter is also restricted from moving off the screen. The player controls their fighter by using the arrow keys, and can fire a missile by pressing spacebar. If the
+	missile hits a galagan, the galagan is removed from the game, and an explosion animation is drawn in the same position. All of the galagans are stored in a single array, and when a galagan is destroyed, the array shrinks by one. This way collision detection can be implemented by simply looping through the array and comparing x and y values of the galagans. Additionally each galagan is a sprite, all the game sprites have a draw method which handles moving through the sprite strip. The game's explosions are also sprites with the same method. Thankfully performance has not been an issue, though hit detection and drawing everything has a time complexity of O(n) where n is the number of enemy galagans. 
+		Scoring is quite simple with the player earning two points for each galagan downed. The game also displays the player's score in the upper right hand corner. The game also 
+	displays a 1UP and HIGH SCORE, just like the original Galaga. However in the version they are simply to taunt the player, as it is in fact impossible to reach either score. 
+	This is done to provide an authentic arcade experience, since the game cannot accept quarters, the high score may not be reached. Galaga Mini does keep the player's score, and it is also displayed when the player either dies or wins the game. 
+		Playing the game is fairly simple. First all the files from the zip or the tar need to be put into the same directory. Next load the html file into Google Chrome. The 
+	game uses a google chrome specific keyboard handler, so it may not work in another browser. Lastly, simply follow the onscreen instructions. 
+
+	SCREENSHOTS:
+
+
+
+	LINK TO GALLERY: 
+	

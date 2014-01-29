@@ -1,0 +1,23 @@
+GALAGA Mini
+Project 1
+CSCI 4070
+Nicholas Moss
+GRADING.txt
+
+
+Definition of Game Objects:
+
+	Player's fighter, missiles, enemy galagans
+
+Animation of Game Objects:
+	
+	Player's fighter moves from side to side. Missiles travel vertically up and down the screen depending on which side fired them. Galagans flap their wings, and the 
+	space background scrolls. If the fighter or a galagan is hit, an explosion is drawn to the screen.
+
+Interaction:
+	
+	If the fighter's missile hits a galagan, they exploded and the player earns 2 points. If the player's fighter is hit by a galagan missile, the player's fighter explodes, and the
+	game ends. 
+
+Score:
+	The player has a starting score of 0, and 2 points are added whenever a galagan is shot down by the player's missile. 
