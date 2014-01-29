@@ -7,7 +7,10 @@
 	<script type="text/javascript" src="galaga_sprite.js"></script>
 	
 	<style type="text/css">
-		canvas { border: 1px solid black; }
+
+		body { background-color: gray;}
+
+		canvas { border: 1px solid red; }
 
 		#field {
 				 display: block;
@@ -15,9 +18,10 @@
 				 margin-right: auto; }	
 		
 		#title { text-align: center;
-				 color: green; }
+				 color: #800000; }
 
-		p { text-align: center; }
+		p { text-align: center;}
+			/*background-color: #1F1F22; } */
 	</style>
 	<script type="text/javascript">
 		
@@ -537,7 +541,8 @@
 	</script>
 	</head>
 	<body onload="init()">
+		<h1 id="title">Galaga Mini</h1>
 		<canvas id="field" width="244px" height="288px"></canvas>
-
+		<p>Use left and right arrows to move, and spacebar to shoot.</p>
 	</body>	
 </html>
