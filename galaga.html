@@ -153,11 +153,9 @@
 					ctx.fillStyle = "red";
 					ctx.fillText("SCORE", 244/2 - 20 + 2, 190);
 					ctx.fillStyle = "white";
-					if(score > 10){
-						ctx.fillText("00" + score, 205, 17);
-					} else {
-						ctx.fillText("000" + score, 205, 17);
-					}
+
+					ctx.fillText("00" + score, 244/2 - 20 + 7, 200);
+	
 					clearInterval(game);
 				}
 				//draw_galagans();
